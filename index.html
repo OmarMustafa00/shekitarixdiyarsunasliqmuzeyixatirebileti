@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xatirə Biletiniz | Şəki Muzeyi</title>
+    <link rel="icon" type="image/png" href="MuzeyLogo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="background-overlay"></div>
+
+    <div class="container">
+        <header> 
+            <img src="MuzeyLogo.png" alt="Muzey Logo" class="logo" id="secretAdminLogo" title="Şəki Muzeyi">
+            <h2 data-i18n="headerTitle">Şəki Tarix-Diyarşünaslıq Muzeyi</h2>
+            <p data-i18n="headerDesc">Ziyarətinizi unudulmaz edin. Öz adınıza xüsusi xatirə biletinizi yaradın.</p>
+        </header>
+
+        <main class="card">   
+            <h1 data-i18n="cardTitle">Xatirə Biletiniz</h1>
+            
+            <div class="lang-flags">
+                <button class="flag-btn active" data-lang="az" title="Azərbaycanca">🇦🇿</button>
+                <button class="flag-btn" data-lang="tr" title="Türkçe">🇹🇷</button>
+                <button class="flag-btn" data-lang="en" title="English">🇬🇧</button>
+                <button class="flag-btn" data-lang="ru" title="Русский">🇷🇺</button>
+            </div>
+            
+            <div class="input-group">
+                <input required type="text" name="Name" autocomplete="name" data-i18n="inputPlaceholder" placeholder="Ad və Soyad daxil edin" id="name" minlength="3" maxlength="25">
+            </div>
+            
+            <button id="submitBtn" class="primary-btn">
+                <svg id="btnIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <div id="btnSpinner" class="spinner hidden"></div>
+                <span id="btnText" data-i18n="btnText">Biletinizi Yaradın</span>
+            </button>
+
+            <div id="previewContainer" class="preview-container hidden">
+                <h3 data-i18n="previewTitle">Biletinizin Önizlənməsi</h3>
+                <div class="ticket-wrapper">
+                    <img id="myImagePreview" src="" alt="Bilet Önizləməsi" class="floating-ticket">
+                </div>
+            </div>
+
+            <div id="shareSection" class="share-section hidden">
+                <div class="success-icon">🎉</div>
+                <h3 data-i18n="readyTitle">Biletiniz Hazırdır!</h3>
+                <div class="insta-mention">
+                    <p data-i18n="instaDesc">📸 İnstagram-da bizi <strong>@shekitarixdiyarshunasliqmuzeyi</strong> etiketləyərək paylaşmağı unutmayın!</p>
+                    <button id="copyTagBtn" class="copy-btn">
+                        <span data-i18n="copyTagText">Etiketi Kopyala</span>
+                    </button>
+                </div>
+                
+                <div class="social-buttons">
+                    <button id="shareNativeBtn" class="share-btn native-share" data-i18n="shareNative">
+                        Şəkil Kimi Paylaş
+                    </button>
+                    <button id="downloadPngBtn" class="share-btn download-btn" data-i18n="downloadPng">
+                        Şəkil (PNG) Endir
+                    </button>
+                </div>
+                
+                <button id="downloadPdfBtn" class="share-btn pdf-btn" data-i18n="downloadPdf">
+                    Sənəd (PDF) Kimi Endir
+                </button>
+            </div>
+
+            <div id="adminCounterSection" class="counter-section">
+                <p><strong data-i18n="ticketCounterText">Toplam yaradılan bilet:</strong> <span id="ticketCounterNumber">0</span></p>
+            </div>
+        </main>
+
+        <footer>
+            <p data-i18n="footerText">© 2026 Şəki Tarix-Diyarşünaslıq Muzeyi. Bütün hüquqlar qorunur.</p>
+        </footer>
+    </div>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9NSWYTQK45"></script>
+    <script>
+       window.dataLayer = window.dataLayer || [];
+       function gtag(){dataLayer.push(arguments);}
+       gtag('js', new Date());
+       gtag('config', 'G-9NSWYTQK45');
+    </script>
+    
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="https://unpkg.com/@pdf-lib/fontkit"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';</script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="./FileSaver.js"></script>
+    <script src="./index.js"></script>
+
+</body>
+</html>

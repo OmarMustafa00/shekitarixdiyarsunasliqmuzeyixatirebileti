@@ -1,0 +1,391 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+:root {
+    --primary-color: #B67352;
+    --primary-hover: #9c5e40;
+    --bg-color: #f8f9fa;
+    --text-dark: #2c3e50;
+    --text-light: #6c757d;
+    --white: #ffffff;
+    --success: #28a745;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    padding: 20px 15px; 
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("ArkaPlan.jpg") no-repeat center center;
+    background-size: cover;
+    filter: blur(8px) brightness(0.6);
+    z-index: -1;
+}
+
+.container {
+    width: 100%;
+    max-width: 650px; 
+    z-index: 1;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--white);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Orijinal tasarıma geri döndürülen logo yapısı */
+.logo {
+    width: 110px;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.logo:active {
+    transform: scale(0.95);
+}
+
+header h2 {
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+header p {
+    font-weight: 400;
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    width: 100%;
+}
+
+.card h1 {
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+}
+
+/* Bayrak Alanı - Mobil esneklik eklendi */
+.lang-flags {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.flag-btn {
+    background: transparent;
+    border: 2px solid transparent;
+    font-size: 1.7rem;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0.4;
+    padding: 0;
+}
+
+.flag-btn:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.flag-btn.active {
+    opacity: 1;
+    background-color: rgba(182, 115, 82, 0.1);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(182, 115, 82, 0.2);
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+input[name="Name"] {
+    width: 100%;
+    font-size: 1.05rem;
+    padding: 14px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    outline: none;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+input[name="Name"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(182, 115, 82, 0.15);
+}
+
+.primary-btn {
+    background: var(--primary-color);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 20px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.primary-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(182, 115, 82, 0.3);
+}
+
+/* Şık CSS Spinner (Yükleme Çemberi) */
+.spinner {
+    width: 22px;
+    height: 22px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--white);
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.preview-container {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    animation: fadeIn 0.4s ease;
+}
+
+.preview-container h3 {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+.ticket-wrapper {
+    padding: 10px;
+    perspective: 1000px;
+}
+
+.floating-ticket {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+    animation: float 4s ease-in-out infinite; 
+}
+
+@keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.share-section {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 2px dashed #e0e0e0;
+    animation: fadeIn 0.5s ease;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.success-icon {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+}
+
+.share-section h3 {
+    color: var(--success);
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.insta-mention {
+    background-color: rgba(182, 115, 82, 0.1);
+    border: 1px solid rgba(182, 115, 82, 0.3);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 20px;
+}
+
+.insta-mention p {
+    color: var(--text-dark) !important;
+    font-size: 0.95rem !important;
+    margin: 0 !important;
+}
+
+.insta-mention strong {
+    color: #E1306C;
+}
+
+.copy-btn {
+    margin-top: 12px;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(225, 48, 108, 0.3);
+}
+
+.copy-btn.copied {
+    background: var(--success);
+}
+
+.social-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.share-btn {
+    flex: 1;
+    padding: 12px 15px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+    border: none;
+}
+
+.native-share {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.native-share:hover {
+    background-color: var(--primary-hover);
+}
+
+.download-btn {
+    background-color: #34495e;
+    color: white;
+}
+
+.download-btn:hover {
+    background-color: #2c3e50;
+}
+
+.pdf-btn {
+    background-color: #e0e0e0;
+    color: var(--text-dark);
+    margin-top: 15px;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+.pdf-btn:hover {
+    background-color: #d5d5d5;
+}
+
+/* Yönetici Sayacı - Gizli tutuldu */
+.counter-section {
+    display: none;
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    font-size: 1.05rem;
+    color: var(--primary-color);
+}
+
+#ticketCounterNumber {
+    background: var(--primary-color);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+footer {
+    text-align: center;
+    margin-top: 25px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobil Cihazlar İçin Tam Optimizasyon */
+@media only screen and (max-width: 480px) {
+    body { padding: 15px 10px; }
+    .card { padding: 25px 15px; }
+    header h2 { font-size: 1.35rem; }
+    header p { font-size: 0.88rem; }
+    .card h1 { font-size: 1.4rem; }
+    .flag-btn { font-size: 1.5rem; width: 38px; height: 38px; }
+    .social-buttons { flex-direction: column; gap: 10px; }
+    .share-btn { width: 100%; padding: 14px; }
+    input[name="Name"] { font-size: 1rem; padding: 12px; }
+    .primary-btn { font-size: 1rem; padding: 12px; }
+}
