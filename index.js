@@ -1,3 +1,31 @@
+// --- FİREBASE BAĞLANTISI VE SAYAÇ YÖNETİMİ ---
+const firebaseConfig = {
+    apiKey: "AIzaSyD-cRaoJ3g_NVAYG86uROgVJdk40mVVlfc",
+    authDomain: "sekimuzeyi.firebaseapp.com",
+    databaseURL: "https://sekimuzeyi-default-rtdb.firebaseio.com",
+    projectId: "sekimuzeyi",
+    storageBucket: "sekimuzeyi.firebasestorage.app",
+    messagingSenderId: "143290135720",
+    appId: "1:143290135720:web:5c0bd0976719aa1891be9d",
+    measurementId: "G-ZPFYHH5SM7"
+};
+
+// Firebase'i Başlat
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+const counterRef = database.ref('museumTotalTickets');
+
+let totalTickets = 0;
+const counterElement = document.getElementById('ticketCounterNumber');
+
+// Veritabanındaki sayıyı canlı olarak dinle
+counterRef.on('value', (snapshot) => {
+    const data = snapshot.val();
+    totalTickets = data ? data : 0; // Eğer veri boşsa 0 yap
+    if (counterElement) counterElement.innerText = totalTickets;
+});
+
+
 // --- ÇEVİRİ SÖZLÜĞÜ VE DİL YÖNETİMİ ---
 const translations = {
     az: {
@@ -144,11 +172,6 @@ adminLogo.addEventListener('click', () => {
     clickTimer = setTimeout(() => { logoClickCount = 0; }, 2000);
 });
 
-// --- SAYAÇ YÖNETİMİ ---
-let totalTickets = localStorage.getItem('museumTotalTickets') ? parseInt(localStorage.getItem('museumTotalTickets')) : 0;
-const counterElement = document.getElementById('ticketCounterNumber');
-if (counterElement) counterElement.innerText = totalTickets;
-
 // --- INSTAGRAM ETİKETİ KOPYALAMA ---
 const copyTagBtn = document.getElementById('copyTagBtn');
 copyTagBtn.addEventListener('click', async () => {
@@ -170,7 +193,7 @@ copyTagBtn.addEventListener('click', async () => {
 let globalPngFile = null;
 let globalPngUri = null;
 let globalPdfUri = null;
-let globalCleanName = ""; // Dinamik dosya ismi icin global degisken
+let globalCleanName = ""; 
 
 const generatePDF = async (name) => {
     const submitBtn = document.getElementById("submitBtn");
@@ -178,13 +201,11 @@ const generatePDF = async (name) => {
     const btnSpinner = document.getElementById("btnSpinner");
     const btnText = document.getElementById("btnText");
     
-    // Spinner'ı aktif et, eski ikonu gizle
     btnIcon.classList.add("hidden");
     btnSpinner.classList.remove("hidden");
     btnText.innerHTML = translations[currentLang].generating;
     submitBtn.disabled = true;
 
-    // Dosya ismi için kullanıcı ismini temizle (Boşlukları alt tire yap ve geçersiz karakterleri sil)
     globalCleanName = name.trim().replace(/\s+/g, '_').replace(/[^a-zA-Z0-9\u0400-\u04FFÇçĞğİıÖöŞşÜüƏə_-]/g, '');
 
     try {
@@ -240,10 +261,9 @@ const generatePDF = async (name) => {
         document.getElementById("previewContainer").classList.remove("hidden");
         document.getElementById('shareSection').classList.remove('hidden');
 
-        // Sayacı artır
+        // BİLET BAŞARIYLA OLUŞUNCA SAYACI FİREBASE'DE ARTIR
         totalTickets++;
-        localStorage.setItem('museumTotalTickets', totalTickets);
-        if (counterElement) counterElement.innerText = totalTickets;
+        counterRef.set(totalTickets); 
 
         confetti({
             particleCount: 150,
@@ -256,7 +276,6 @@ const generatePDF = async (name) => {
         console.error("Xəta baş verdi:", error);
         alert(translations[currentLang].errorLong); 
     } finally {
-        // Butonu eski haline getir
         btnIcon.classList.remove("hidden");
         btnSpinner.classList.add("hidden");
         btnText.innerHTML = translations[currentLang].btnText; 
@@ -269,8 +288,6 @@ const inputValue = document.querySelector("#name");
 
 submitBtn.addEventListener("click", () => {
     const val = inputValue.value.trim();
-    
-    // Gelişmiş Dil Validasyonu (Sadece harfler, Latin, Kiril ve boşluklar kabul edilir)
     const nameRegex = /^[a-zA-Z\u0400-\u04FFÇçĞğİıÖöŞşÜüƏə\s]+$/;
 
     if (!val || val.length < 3) {
@@ -282,7 +299,6 @@ submitBtn.addEventListener("click", () => {
     }
 });
 
-// --- DİNAMİK DOSYA İSİMLİ ENDİRME BUTONLARI ---
 document.getElementById('downloadPngBtn').addEventListener('click', () => {
     if (globalPngUri) {
         const fileName = globalCleanName ? `SekiMuzeyi_${globalCleanName}.png` : "XatireBileti.png";
@@ -292,7 +308,7 @@ document.getElementById('downloadPngBtn').addEventListener('click', () => {
 
 document.getElementById('downloadPdfBtn').addEventListener('click', () => {
     if (globalPdfUri) {
-        const fileName = globalCleanName ? `SeyiMuzeyi_${globalCleanName}.pdf` : "XatireBileti.pdf";
+        const fileName = globalCleanName ? `SekiMuzeyi_${globalCleanName}.pdf` : "XatireBileti.pdf";
         saveAs(globalPdfUri, fileName, { autoBom: true });
     }
 });

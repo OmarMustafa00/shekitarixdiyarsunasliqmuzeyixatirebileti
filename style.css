@@ -54,7 +54,6 @@ header {
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
-/* Orijinal tasarıma geri döndürülen logo yapısı */
 .logo {
     width: 110px;
     max-width: 100%;
@@ -97,7 +96,6 @@ header p {
     margin-bottom: 15px;
 }
 
-/* Bayrak Alanı - Mobil esneklik eklendi */
 .lang-flags {
     display: flex;
     justify-content: center;
@@ -181,7 +179,6 @@ input[name="Name"]:focus {
     box-shadow: 0 5px 15px rgba(182, 115, 82, 0.3);
 }
 
-/* Şık CSS Spinner (Yükleme Çemberi) */
 .spinner {
     width: 22px;
     height: 22px;
@@ -345,7 +342,6 @@ input[name="Name"]:focus {
     background-color: #d5d5d5;
 }
 
-/* Yönetici Sayacı - Gizli tutuldu */
 .counter-section {
     display: none;
     margin-top: 25px;
@@ -376,7 +372,6 @@ footer {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Mobil Cihazlar İçin Tam Optimizasyon */
 @media only screen and (max-width: 480px) {
     body { padding: 15px 10px; }
     .card { padding: 25px 15px; }
